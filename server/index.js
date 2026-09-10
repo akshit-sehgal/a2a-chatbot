@@ -39,7 +39,7 @@ const pushAfterDelay = (client, payload, delay) => {
     setTimeout(() => pushToClient(client, payload), delay);
 };
 
-app.get('/api/stream', (request, response) => {
+app.get('/sse/stream', (request, response) => {
     const { sessionId } = request.query;
 
     if (!sessionId) {
@@ -63,7 +63,7 @@ app.get('/api/stream', (request, response) => {
 const resolveDelay = delay =>
     Number.isFinite(delay) && delay >= 0 ? delay : TYPING_DELAY_MS;
 
-app.post('/api/message', (request, response) => {
+app.post('/sse/message', (request, response) => {
     const { sessionId, action, text, data } = request.body || {};
 
     if (!sessionId) {
@@ -79,8 +79,8 @@ app.post('/api/message', (request, response) => {
     response.status(202).json({ accepted: true });
 });
 
-app.post('/api/push', (request, response) => {
-    const { sessionId, delay, ...payload } = request.body || {};
+app.post('/sse/push', (request, response) => {
+    const { sessionId, data, delay } = request.body || {};
 
     if (!sessionId) {
         response.status(400).json({ error: 'sessionId is required' });
@@ -89,11 +89,11 @@ app.post('/api/push', (request, response) => {
 
     const { client } = getSession(sessionId);
 
-    pushAfterDelay(client, { data: payload }, resolveDelay(delay));
+    pushAfterDelay(client, { data }, resolveDelay(delay));
 
     response.status(202).json({ accepted: true, delivered: Boolean(client) });
 });
 
 app.listen(PORT, () => {
-    console.log(`Mock chat backend listening on http://localhost:${PORT}`);
+    console.log(`Backend listening on http://localhost:${PORT}`);
 });

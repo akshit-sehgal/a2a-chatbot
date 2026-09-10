@@ -22,8 +22,8 @@ export const QUESTION_TYPES = {
 };
 
 export const API_ROUTES = {
-    MESSAGE: '/api/message',
-    STREAM: '/api/stream'
+    MESSAGE: '/sse/message',
+    STREAM: '/sse/stream'
 };
 
 export const CONNECTION_STATUS = {
