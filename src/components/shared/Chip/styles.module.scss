@@ -1,0 +1,52 @@
+.chip {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: none;
+    font-weight: 700;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+    &--action {
+        min-height: 3.4rem;
+        padding: 0.7rem 1.3rem;
+        border: 0.1rem solid var(--primary-border);
+        border-radius: 1.2rem;
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--primary-dark);
+        font-size: 1.25rem;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+            background: var(--primary-tint-strong);
+        }
+    }
+
+    &--removable {
+        padding: 0.7rem 1rem;
+        border: 0.1rem solid rgba(79, 70, 229, 0.2);
+        border-radius: 1.1rem;
+        background: rgba(79, 70, 229, 0.09);
+        color: var(--primary-dark);
+        font-size: 1.25rem;
+        cursor: pointer;
+
+        &:hover {
+            border-color: rgba(224, 51, 143, 0.3);
+            background: rgba(224, 51, 143, 0.12);
+            color: var(--danger);
+        }
+    }
+
+    &--static {
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.9rem;
+        background: var(--primary-tint);
+        color: var(--primary-dark);
+        font-size: 1.15rem;
+    }
+
+    &__icon {
+        flex: none;
+    }
+}

@@ -1,0 +1,125 @@
+.welcome {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+
+    &__options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    &__option {
+        display: flex;
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.2s, filter 0.2s, transform 0.1s;
+
+        &:active {
+            transform: scale(0.985);
+        }
+
+        &--primary {
+            grid-column: span 2;
+            align-items: center;
+            gap: 1.3rem;
+            min-height: 6.4rem;
+            padding: 1.4rem 1.6rem;
+            border: 0.1rem solid var(--primary-dark);
+            border-radius: 2rem;
+            background: var(--primary);
+            color: var(--on-primary);
+
+            &:hover {
+                filter: brightness(1.06);
+            }
+        }
+
+        &--secondary {
+            flex-direction: column;
+            gap: 0.8rem;
+            min-height: 9.8rem;
+            padding: 1.3rem 1.4rem;
+            border: 0.1rem solid var(--border);
+            border-radius: 2rem;
+            background: var(--surface-soft);
+            backdrop-filter: var(--glass-blur-soft);
+            -webkit-backdrop-filter: var(--glass-blur-soft);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.85);
+            }
+        }
+    }
+
+    &__option-icon {
+        display: grid;
+        place-items: center;
+        flex: none;
+    }
+
+    &__option--primary &__option-icon {
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.3rem;
+        background: rgba(255, 255, 255, 0.22);
+    }
+
+    &__option--secondary &__option-icon {
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 1.2rem;
+        background: var(--surface-muted);
+    }
+
+    &__option-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__option-label {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    &__option--primary &__option-label {
+        font-size: 1.5rem;
+    }
+
+    &__option--secondary &__option-label {
+        font-size: 1.35rem;
+        color: var(--text-primary);
+    }
+
+    &__option-description {
+        font-weight: 500;
+        line-height: 1.35;
+    }
+
+    &__option--primary &__option-description {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    &__option--secondary &__option-description {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+    }
+
+    &__option-chevron {
+        flex: none;
+    }
+}
+
+@media (max-width: 26rem) {
+    .welcome__options {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome__option--primary {
+        grid-column: span 1;
+    }
+}

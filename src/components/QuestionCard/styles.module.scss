@@ -1,0 +1,117 @@
+.question {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.3rem;
+    border: 0.1rem solid var(--border-strong);
+    border-radius: 1.8rem;
+    background: rgba(255, 255, 255, 0.72);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    &__number {
+        display: grid;
+        place-items: center;
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 0.8rem;
+        background: var(--primary-tint-strong);
+        color: var(--primary-dark);
+        font-size: 1.15rem;
+        font-weight: 800;
+    }
+
+    &__caption {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__remove {
+        margin-left: auto;
+    }
+
+    &__types {
+        display: flex;
+        gap: 0.6rem;
+    }
+
+    &__type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex: 1;
+        min-height: 3.8rem;
+        border: 0.15rem solid rgba(79, 70, 229, 0.18);
+        border-radius: 1.2rem;
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+        &--active {
+            border-color: var(--primary-dark);
+            background: var(--primary);
+            color: var(--on-primary);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    &__hint {
+        padding: 1.1rem 1.2rem;
+        border: 0.15rem dashed rgba(79, 70, 229, 0.25);
+        border-radius: 1.2rem;
+        background: rgba(255, 255, 255, 0.5);
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+
+    &__options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    &__option {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+    }
+
+    &__option-field {
+        flex: 1;
+    }
+
+    &__mark {
+        flex: none;
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 0.2rem solid rgba(79, 70, 229, 0.45);
+        border-radius: 0.5rem;
+
+        &--round {
+            border-radius: 50%;
+        }
+    }
+
+    &__add-option {
+        align-self: flex-start;
+        min-height: 3.6rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1.25rem;
+    }
+}

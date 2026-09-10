@@ -1,0 +1,55 @@
+:root {
+    /* Base */
+    --bg: #eef1f6;
+    --text: #0f172a;
+    --page-gradient: radial-gradient(110rem 70rem at 25% 8%, #fbfcfe 0%, #eef1f6 50%, #e5e9f0 100%);
+    --app-gradient: linear-gradient(170deg, #f8fafc 0%, #f1f4f9 55%, #eaeef4 100%);
+
+    /* Typography */
+    --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, system-ui, sans-serif;
+    --font-display: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Brand */
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --primary-hover: #6366f1;
+    --on-primary: #ffffff;
+    --primary-tint: rgba(79, 70, 229, 0.08);
+    --primary-tint-strong: rgba(79, 70, 229, 0.12);
+    --primary-border: rgba(79, 70, 229, 0.22);
+    --primary-border-strong: rgba(79, 70, 229, 0.4);
+
+    /* Text */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-body: #334155;
+    --text-muted: #64748b;
+    --text-subtle: #94a3b8;
+
+    /* Surfaces */
+    --surface: rgba(255, 255, 255, 0.68);
+    --surface-strong: rgba(255, 255, 255, 0.85);
+    --surface-soft: rgba(255, 255, 255, 0.6);
+    --surface-solid: #ffffff;
+    --surface-muted: #f1f5f9;
+    --surface-indigo: #eef2ff;
+
+    /* Borders */
+    --border: rgba(15, 23, 42, 0.1);
+    --border-strong: rgba(15, 23, 42, 0.14);
+    --border-light: rgba(255, 255, 255, 0.8);
+    --border-lighter: rgba(255, 255, 255, 0.9);
+
+    /* Status */
+    --success: #10b981;
+    --success-dark: #047857;
+    --success-tint: rgba(16, 185, 129, 0.14);
+    --danger: #b91c1c;
+    --danger-tint: rgba(190, 18, 60, 0.1);
+    --danger-tint-strong: rgba(190, 18, 60, 0.2);
+
+    /* Effects */
+    --glass-blur: blur(1.8rem) saturate(170%);
+    --glass-blur-soft: blur(1.4rem) saturate(160%);
+    --shadow-card: 0 1.2rem 3.2rem rgba(15, 23, 42, 0.08);
+}

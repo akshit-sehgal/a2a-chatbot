@@ -1,0 +1,51 @@
+@keyframes dot {
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.45;
+    }
+
+    30% {
+        transform: translateY(-0.4rem);
+        opacity: 1;
+    }
+}
+
+.typing {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5rem;
+    padding: 1.3rem 1.6rem;
+    border: 0.1rem solid var(--border);
+    border-radius: 2rem 2rem 2rem 0.8rem;
+    background: rgba(255, 255, 255, 0.66);
+    backdrop-filter: var(--glass-blur-soft);
+    -webkit-backdrop-filter: var(--glass-blur-soft);
+}
+
+.typing__dot {
+    &--first,
+    &--second,
+    &--third {
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        animation: dot 1.2s infinite;
+    }
+
+    &--first {
+        background: var(--primary);
+    }
+
+    &--second {
+        background: var(--primary-hover);
+        animation-delay: 0.15s;
+    }
+
+    &--third {
+        background: var(--text-subtle);
+        animation-delay: 0.3s;
+    }
+}

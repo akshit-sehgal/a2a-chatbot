@@ -1,0 +1,12 @@
+.quick-actions {
+    display: flex;
+    gap: 0.7rem;
+    padding-bottom: 0.9rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        height: 0;
+    }
+}

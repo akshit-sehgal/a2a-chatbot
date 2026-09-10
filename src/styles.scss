@@ -1,0 +1,83 @@
+@use './styles/fonts';
+@use './styles/theme';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--page-gradient);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select,
+a,
+label,
+[role='button'],
+[onclick] {
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+    margin: 0;
+}
+
+#root {
+    isolation: isolate;
+    height: 100%;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

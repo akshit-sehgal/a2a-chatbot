@@ -1,0 +1,20 @@
+.chat-app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 54rem;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background: var(--app-gradient);
+}
+
+@media (min-width: 60rem) {
+    .chat-app {
+        height: calc(100% - 6.4rem);
+        margin: 3.2rem auto;
+        border: 0.1rem solid var(--border);
+        border-radius: 3.2rem;
+        box-shadow: var(--shadow-card);
+    }
+}

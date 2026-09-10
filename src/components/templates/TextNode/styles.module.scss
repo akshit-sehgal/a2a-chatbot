@@ -1,0 +1,4 @@
+/* TextNode renders inside MessageBubble and needs no styles of its own. */
+.text-node {
+    display: contents;
+}

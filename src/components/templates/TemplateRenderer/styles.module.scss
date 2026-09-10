@@ -1,0 +1,4 @@
+/* TemplateRenderer only delegates to a template and needs no styles of its own. */
+.template-renderer {
+    display: contents;
+}
