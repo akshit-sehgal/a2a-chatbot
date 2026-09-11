@@ -57,7 +57,7 @@ const resolveDelay = delay =>
     Number.isFinite(delay) && delay >= 0 ? delay : TYPING_DELAY_MS;
 
 app.post('/sse/message', (request, response) => {
-    const { sessionId, action, text, data, threadId } = request.body || {};
+    const { sessionId, action, text, data, threadId, type } = request.body || {};
 
     if (!sessionId) {
         response.status(400).json({ error: 'sessionId is required' });
@@ -65,7 +65,7 @@ app.post('/sse/message', (request, response) => {
     }
 
     const resolvedThreadId = threadId || randomUUID();
-    const reply = buildReply({ sessionId, action, text, data });
+    const reply = buildReply({ sessionId, action, text, data, type });
     const { client } = getSession(sessionId);
 
     pushAfterDelay(client, { threadId: resolvedThreadId, ...reply }, TYPING_DELAY_MS);

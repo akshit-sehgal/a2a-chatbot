@@ -23,9 +23,22 @@ export const TYPING_DELAY_MS = 750;
 
 export const HEARTBEAT_INTERVAL_MS = 25000;
 
+export const APP_TYPES = {
+    JOB_SEEKER: 'js',
+    RECRUITER: 'rec'
+};
+
 export const RECRUITER_NAME = 'Meera';
 
 export const COMPANY_NAME = 'Astranova Mobility';
+
+export const CANDIDATE_NAME = 'Rhea';
+
+export const PROFILE_VIEWS_COUNT = 4;
+
+export const NEW_OPENINGS_COUNT = 12;
+
+export const APPLICATION_STATUS_SUMMARY = '2 in review · 1 interview scheduled';
 
 export const DEFAULT_JOB_DRAFT = {
     fields: {

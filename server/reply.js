@@ -1,4 +1,4 @@
-import { INTENTS } from './constants.js';
+import { APP_TYPES, INTENTS } from './constants.js';
 import { resolveIntent } from './intent.js';
 import { getSession, updateSessionDraft } from './sessions.js';
 import {
@@ -6,6 +6,7 @@ import {
     buildFallback,
     buildJobCard,
     buildJobPostingForm,
+    buildJobSeekerWelcomeScreen,
     buildJobsList,
     buildQuestionsBuilder,
     buildShareLink,
@@ -29,8 +30,11 @@ const applyQuestionsPayload = (sessionId, payload) => {
     updateSessionDraft(sessionId, { questions: payload.questions });
 };
 
+const buildWelcomeReply = (draft, type) =>
+    type === APP_TYPES.JOB_SEEKER ? buildJobSeekerWelcomeScreen() : buildWelcomeScreen();
+
 const REPLY_BUILDERS = {
-    [INTENTS.WELCOME]: () => buildWelcomeScreen(),
+    [INTENTS.WELCOME]: buildWelcomeReply,
     [INTENTS.POST_JOB]: draft => buildJobPostingForm(draft),
     [INTENTS.BUILD_QUESTIONS]: () => buildQuestionsBuilder(),
     [INTENTS.PUBLISH_JOB]: draft => buildJobCard(draft),
@@ -40,7 +44,7 @@ const REPLY_BUILDERS = {
     [INTENTS.FALLBACK]: () => buildFallback()
 };
 
-export const buildReply = ({ sessionId, action, text, data }) => {
+export const buildReply = ({ sessionId, action, text, data, type }) => {
     const intent = resolveIntent({ action, text });
 
     applyFormPayload(sessionId, data);
@@ -48,5 +52,5 @@ export const buildReply = ({ sessionId, action, text, data }) => {
 
     const buildReplyForIntent = REPLY_BUILDERS[intent] || REPLY_BUILDERS[INTENTS.FALLBACK];
 
-    return buildReplyForIntent(getSession(sessionId).draft);
+    return buildReplyForIntent(getSession(sessionId).draft, type);
 };

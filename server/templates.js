@@ -1,8 +1,12 @@
 import {
     APPLICANTS,
+    APPLICATION_STATUS_SUMMARY,
+    CANDIDATE_NAME,
     COMPANY_NAME,
     DEFAULT_QUESTIONS,
+    NEW_OPENINGS_COUNT,
     PAST_JOBS,
+    PROFILE_VIEWS_COUNT,
     RECRUITER_NAME,
     TEMPLATE_TYPES
 } from './constants.js';
@@ -39,6 +43,39 @@ export const buildWelcomeScreen = () =>
                     label: 'Review applicants',
                     description: '34 new, 9 shortlist-ready',
                     icon: 'user',
+                    variant: 'secondary'
+                }
+            ]
+        }
+    );
+
+export const buildJobSeekerWelcomeScreen = () =>
+    buildMessage(
+        TEMPLATE_TYPES.WELCOME_SCREEN,
+        `<strong>${PROFILE_VIEWS_COUNT} recruiters</strong> viewed your profile this week and ${NEW_OPENINGS_COUNT} new job openings match your skills. What should we do first?`,
+        ['Update your profile', 'View openings', 'Application status'],
+        {
+            greeting: `Welcome back, ${CANDIDATE_NAME}.`,
+            options: [
+                {
+                    id: 'update-profile',
+                    label: 'Update your profile',
+                    description: 'Keep your skills and resume current',
+                    icon: 'edit',
+                    variant: 'primary'
+                },
+                {
+                    id: 'view-openings',
+                    label: 'View openings',
+                    description: `${NEW_OPENINGS_COUNT} new roles match your profile`,
+                    icon: 'briefcase',
+                    variant: 'secondary'
+                },
+                {
+                    id: 'application-status',
+                    label: 'Application status',
+                    description: APPLICATION_STATUS_SUMMARY,
+                    icon: 'clipboard',
                     variant: 'secondary'
                 }
             ]
