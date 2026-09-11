@@ -39,7 +39,18 @@ export const CONNECTION_STATUS = {
 };
 
 export const QUERY_PARAMS = {
-    ENC_USER_ID: 'encUserId'
+    ENC_USER_ID: 'encUserId',
+    APP_TYPE: 'type'
+};
+
+export const APP_TYPES = {
+    JOB_SEEKER: 'js',
+    RECRUITER: 'rec'
+};
+
+export const APP_NAME_BY_TYPE = {
+    [APP_TYPES.JOB_SEEKER]: 'Job seeker assist',
+    [APP_TYPES.RECRUITER]: 'Recruiter Assist'
 };
 
 export const BUTTON_VARIANTS = {

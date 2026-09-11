@@ -3,14 +3,13 @@ import { isFunction } from '../../utils';
 import IconButton from '../shared/IconButton';
 import { ICON_BUTTON_VARIANTS } from '../shared/IconButton/constants';
 import QuickActions from '../QuickActions';
-import micIcon from '../../assets/icons/mic-indigo.svg';
 import sendIcon from '../../assets/icons/send-white.svg';
 import { INPUT_PLACEHOLDER, SEND_TITLE, VOICE_TITLE } from './constants';
-import { canSubmit, isSubmitKey } from './utils';
+import { canSubmit, getMicIcon, isSubmitKey } from './utils';
 import styles from './styles.module.scss';
 
 const ChatComposer = props => {
-    const { actions, onSendMessage, onActionClick } = props;
+    const { actions, isJobSeeker, onSendMessage, onActionClick } = props;
 
     const [draft, setDraft] = useState('');
 
@@ -52,7 +51,7 @@ const ChatComposer = props => {
 
     const renderVoiceButton = () => (
         <IconButton
-            iconSrc={micIcon}
+            iconSrc={getMicIcon(isJobSeeker)}
             title={VOICE_TITLE}
             customCSS={styles['composer__voice']}
         />

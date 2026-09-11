@@ -14,6 +14,8 @@ import {
 
 export const getSessionId = () => getQueryParam(QUERY_PARAMS.ENC_USER_ID);
 
+export const getAppType = () => getQueryParam(QUERY_PARAMS.APP_TYPE);
+
 export const createUserMessage = (text, threadId = null) => ({
     id: generateId(),
     author: MESSAGE_AUTHORS.USER,

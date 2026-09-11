@@ -1,3 +1,4 @@
+import useAppType from '../../hooks/useAppType';
 import useChat from '../../hooks/useChat';
 import ChatComposer from '../ChatComposer';
 import ChatWindow from '../ChatWindow';
@@ -7,6 +8,8 @@ import { getLatestActions } from './utils';
 import styles from './styles.module.scss';
 
 const ChatApp = () => {
+    const { appName, isJobSeeker } = useAppType();
+
     const {
         activeThreadNumber,
         goToNextThread,
@@ -27,6 +30,7 @@ const ChatApp = () => {
     return (
         <main className={styles['chat-app']} aria-label={CHAT_LABEL}>
             <Navbar
+                appName={appName}
                 activeThreadNumber={activeThreadNumber}
                 totalThreads={totalThreads}
                 hasNewThread={hasNewThread}
@@ -39,6 +43,7 @@ const ChatApp = () => {
             />
             <ChatComposer
                 actions={quickActions}
+                isJobSeeker={isJobSeeker}
                 onSendMessage={sendMessage}
                 onActionClick={onQuickActionClick}
             />

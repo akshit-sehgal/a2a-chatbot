@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 
 const Navbar = props => {
     const {
+        appName = APP_NAME,
         activeThreadNumber = 0,
         totalThreads = 0,
         hasNewThread = false,
@@ -23,7 +24,7 @@ const Navbar = props => {
 
     const renderDetails = () => (
         <div className={styles['navbar__details']}>
-            <h1 className={styles['navbar__title']}>{APP_NAME}</h1>
+            <h1 className={styles['navbar__title']}>{appName}</h1>
         </div>
     );
 

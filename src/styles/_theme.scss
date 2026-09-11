@@ -11,6 +11,7 @@
 
     /* Brand */
     --primary: #4f46e5;
+    --primary-rgb: 79, 70, 229;
     --primary-dark: #4338ca;
     --primary-hover: #6366f1;
     --on-primary: #ffffff;
@@ -52,4 +53,17 @@
     --glass-blur: blur(1.8rem) saturate(170%);
     --glass-blur-soft: blur(1.4rem) saturate(160%);
     --shadow-card: 0 1.2rem 3.2rem rgba(15, 23, 42, 0.08);
+}
+
+/* Job seeker theme (?type=js) — brownish gold in place of violet */
+:root[data-app-type='js'] {
+    --primary: #a8712e;
+    --primary-rgb: 168, 113, 46;
+    --primary-dark: #7c531f;
+    --primary-hover: #c1893f;
+    --primary-tint: rgba(168, 113, 46, 0.08);
+    --primary-tint-strong: rgba(168, 113, 46, 0.12);
+    --primary-border: rgba(168, 113, 46, 0.22);
+    --primary-border-strong: rgba(168, 113, 46, 0.4);
+    --surface-indigo: #f8f0e3;
 }

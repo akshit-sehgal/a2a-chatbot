@@ -7,6 +7,7 @@ import {
     createUserMessage,
     getActionLabel,
     getActionUserText,
+    getAppType,
     getSessionId,
     getThreadIds,
     getThreadMessages,
@@ -25,6 +26,7 @@ const useChat = () => {
     const [lastSeenThreadId, setLastSeenThreadId] = useState();
 
     const sessionIdRef = useRef(getSessionId());
+    const appTypeRef = useRef(getAppType());
     const hasRequestedWelcomeRef = useRef(false);
 
     const threadIds = useMemo(() => getThreadIds(messages), [messages]);
@@ -65,6 +67,7 @@ const useChat = () => {
                 await postChatMessage({
                     sessionId: sessionIdRef.current,
                     threadId: activeThreadId ?? null,
+                    type: appTypeRef.current,
                     ...body
                 });
             } catch {

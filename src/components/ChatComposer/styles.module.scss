@@ -46,12 +46,12 @@
     &__voice {
         width: 4.8rem;
         height: 4.8rem;
-        border: 0.15rem solid rgba(79, 70, 229, 0.16);
+        border: 0.15rem solid rgba(var(--primary-rgb), 0.16);
         border-radius: 1.7rem;
         background: rgba(255, 255, 255, 0.75);
 
         &:hover {
-            background: rgba(79, 70, 229, 0.1);
+            background: rgba(var(--primary-rgb), 0.1);
         }
     }
 }
