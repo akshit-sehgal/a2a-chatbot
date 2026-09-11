@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 import cors from 'cors';
 import express from 'express';
 import { HEARTBEAT_INTERVAL_MS, PORT, TYPING_DELAY_MS } from './constants.js';
+import { pushAfterDelay } from './push.js';
 import { buildReply } from './reply.js';
 import {
     clearSessionClient,
@@ -22,16 +23,6 @@ const openStream = response => {
         'X-Accel-Buffering': 'no'
     });
     response.write('retry: 3000\n\n');
-};
-
-const pushToClient = (client, payload) => {
-    if (!client) return;
-
-    client.write(`data: ${JSON.stringify(payload)}\n\n`);
-};
-
-const pushAfterDelay = (client, payload, delay) => {
-    setTimeout(() => pushToClient(client, payload), delay);
 };
 
 app.get('/sse/stream', (request, response) => {
@@ -65,10 +56,16 @@ app.post('/sse/message', (request, response) => {
     }
 
     const resolvedThreadId = threadId || randomUUID();
-    const reply = buildReply({ sessionId, action, text, data, type });
+    const { reply, sideEffects } = buildReply({ sessionId, action, text, data, type });
     const { client } = getSession(sessionId);
 
     pushAfterDelay(client, { threadId: resolvedThreadId, ...reply }, TYPING_DELAY_MS);
+
+    sideEffects.forEach(({ sessionId: targetSessionId, ...sideEffectReply }) => {
+        const { client: targetClient } = getSession(targetSessionId);
+
+        pushAfterDelay(targetClient, { threadId: randomUUID(), ...sideEffectReply }, TYPING_DELAY_MS);
+    });
 
     response.status(202).json({ accepted: true });
 });

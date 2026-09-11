@@ -154,3 +154,6 @@ export const REFERRAL_REQUEST = {
     },
     matchScore: 92
 };
+
+// TODO: replace with the recruiter's real sessionId once referrals are tied to a specific recruiter.
+export const REFERRAL_APPROVAL_SESSION_ID = '3';

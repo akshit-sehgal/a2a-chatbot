@@ -1,4 +1,4 @@
-import { APP_TYPES, INTENTS } from './constants.js';
+import { APP_TYPES, INTENTS, REFERRAL_APPROVAL_SESSION_ID } from './constants.js';
 import { resolveIntent } from './intent.js';
 import {
     getSession,
@@ -79,6 +79,12 @@ const REPLY_BUILDERS = {
     [INTENTS.FALLBACK]: () => buildFallback()
 };
 
+const buildSideEffects = intent => {
+    if (intent !== INTENTS.ASK_REFERRAL) return [];
+
+    return [{ sessionId: REFERRAL_APPROVAL_SESSION_ID, ...buildReferralApprovalCard() }];
+};
+
 export const buildReply = ({ sessionId, action, text, data, type }) => {
     const intent = resolveIntent({ action, text });
 
@@ -87,6 +93,7 @@ export const buildReply = ({ sessionId, action, text, data, type }) => {
     if (intent === INTENTS.SAVE_PROFILE) applyProfilePayload(sessionId, data);
 
     const buildReplyForIntent = REPLY_BUILDERS[intent] || REPLY_BUILDERS[INTENTS.FALLBACK];
+    const reply = buildReplyForIntent(getSession(sessionId), type, data);
 
-    return buildReplyForIntent(getSession(sessionId), type, data);
+    return { reply, sideEffects: buildSideEffects(intent) };
 };
