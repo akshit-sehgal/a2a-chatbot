@@ -1,18 +1,13 @@
+import { randomUUID } from 'crypto';
 import cors from 'cors';
 import express from 'express';
-import {
-    HEARTBEAT_INTERVAL_MS,
-    PORT,
-    TYPING_DELAY_MS,
-    WELCOME_DELAY_MS
-} from './constants.js';
+import { HEARTBEAT_INTERVAL_MS, PORT, TYPING_DELAY_MS } from './constants.js';
 import { buildReply } from './reply.js';
 import {
     clearSessionClient,
     getSession,
     setSessionClient
 } from './sessions.js';
-import { buildWelcomeScreen } from './templates.js';
 
 const app = express();
 
@@ -52,8 +47,6 @@ app.get('/sse/stream', (request, response) => {
 
     const heartbeat = setInterval(() => response.write(': ping\n\n'), HEARTBEAT_INTERVAL_MS);
 
-    pushAfterDelay(response, buildWelcomeScreen(), WELCOME_DELAY_MS);
-
     request.on('close', () => {
         clearInterval(heartbeat);
         clearSessionClient(sessionId);
@@ -64,23 +57,24 @@ const resolveDelay = delay =>
     Number.isFinite(delay) && delay >= 0 ? delay : TYPING_DELAY_MS;
 
 app.post('/sse/message', (request, response) => {
-    const { sessionId, action, text, data } = request.body || {};
+    const { sessionId, action, text, data, threadId } = request.body || {};
 
     if (!sessionId) {
         response.status(400).json({ error: 'sessionId is required' });
         return;
     }
 
+    const resolvedThreadId = threadId || randomUUID();
     const reply = buildReply({ sessionId, action, text, data });
     const { client } = getSession(sessionId);
 
-    pushAfterDelay(client, reply, TYPING_DELAY_MS);
+    pushAfterDelay(client, { threadId: resolvedThreadId, ...reply }, TYPING_DELAY_MS);
 
     response.status(202).json({ accepted: true });
 });
 
 app.post('/sse/push', (request, response) => {
-    const { sessionId, data, delay } = request.body || {};
+    const { sessionId, data, delay, threadId = null } = request.body || {};
 
     if (!sessionId) {
         response.status(400).json({ error: 'sessionId is required' });
@@ -89,7 +83,7 @@ app.post('/sse/push', (request, response) => {
 
     const { client } = getSession(sessionId);
 
-    pushAfterDelay(client, { data }, resolveDelay(delay));
+    pushAfterDelay(client, { threadId, data }, resolveDelay(delay));
 
     response.status(202).json({ accepted: true, delivered: Boolean(client) });
 });

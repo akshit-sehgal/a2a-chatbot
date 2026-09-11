@@ -1,5 +1,4 @@
 import useChat from '../../hooks/useChat';
-import { reloadPage } from '../../utils';
 import ChatComposer from '../ChatComposer';
 import ChatWindow from '../ChatWindow';
 import Navbar from '../Navbar';
@@ -8,22 +7,33 @@ import { getLatestActions } from './utils';
 import styles from './styles.module.scss';
 
 const ChatApp = () => {
-    const { connectionStatus, isTyping, messages, sendAction, sendMessage } =
-        useChat();
+    const {
+        activeThreadNumber,
+        goToNextThread,
+        hasNewThread,
+        isTyping,
+        sendAction,
+        sendMessage,
+        threadMessages,
+        totalThreads
+    } = useChat();
 
-    const quickActions = getLatestActions(messages);
+    const quickActions = getLatestActions(threadMessages);
 
     const onTemplateAction = (action, data) => sendAction(action, data);
 
     const onQuickActionClick = action => sendAction(action);
 
-    const onRestartClick = () => reloadPage();
-
     return (
         <main className={styles['chat-app']} aria-label={CHAT_LABEL}>
-            <Navbar connectionStatus={connectionStatus} onRestartClick={onRestartClick} />
+            <Navbar
+                activeThreadNumber={activeThreadNumber}
+                totalThreads={totalThreads}
+                hasNewThread={hasNewThread}
+                onNextThread={goToNextThread}
+            />
             <ChatWindow
-                messages={messages}
+                messages={threadMessages}
                 isTyping={isTyping}
                 onAction={onTemplateAction}
             />

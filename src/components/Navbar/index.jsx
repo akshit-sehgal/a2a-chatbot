@@ -1,21 +1,19 @@
-import cx from 'classnames';
-import { APP_NAME, APP_STATUS_LABEL, CONNECTION_STATUS } from '../../constants';
+import { APP_NAME } from '../../constants';
 import IconButton from '../shared/IconButton';
 import { ICON_BUTTON_VARIANTS } from '../shared/IconButton/constants';
-import refreshIcon from '../../assets/icons/refresh.svg';
+import chevronRightIcon from '../../assets/icons/chevron-right-grey.svg';
 import sparkleIcon from '../../assets/icons/sparkle-white.svg';
-import { CONNECTION_LABELS, RESTART_TITLE } from './constants';
-import { getConnectionLabel, isConnectionOnline } from './utils';
+import { NEXT_THREAD_TITLE } from './constants';
+import { getThreadIndicatorLabel, hasThreads } from './utils';
 import styles from './styles.module.scss';
 
 const Navbar = props => {
-    const { connectionStatus = CONNECTION_STATUS.CONNECTING, onRestartClick } = props;
-
-    const isOnline = isConnectionOnline(connectionStatus);
-
-    const statusDotCSS = cx(styles['navbar__status-dot'], {
-        [styles['navbar__status-dot--offline']]: !isOnline
-    });
+    const {
+        activeThreadNumber = 0,
+        totalThreads = 0,
+        hasNewThread = false,
+        onNextThread
+    } = props;
 
     const renderBrand = () => (
         <div className={styles['navbar__brand']}>
@@ -26,33 +24,35 @@ const Navbar = props => {
     const renderDetails = () => (
         <div className={styles['navbar__details']}>
             <h1 className={styles['navbar__title']}>{APP_NAME}</h1>
-            <p className={styles['navbar__status']}>
-                <span className={statusDotCSS} />
-                {getConnectionLabel(
-                    connectionStatus,
-                    APP_STATUS_LABEL,
-                    CONNECTION_LABELS.OFFLINE
-                )}
-            </p>
         </div>
     );
 
-    const renderActions = () => (
-        <div className={styles['navbar__actions']}>
-            <IconButton
-                iconSrc={refreshIcon}
-                title={RESTART_TITLE}
-                variant={ICON_BUTTON_VARIANTS.GLASS}
-                onClick={onRestartClick}
-            />
-        </div>
-    );
+    const renderThreadSwitcher = () => {
+        if (!hasThreads(totalThreads)) return null;
+
+        return (
+            <div className={styles['navbar__thread-switcher']}>
+                <span className={styles['navbar__thread-count']}>
+                    {getThreadIndicatorLabel(activeThreadNumber, totalThreads)}
+                </span>
+                <div className={styles['navbar__next-thread']}>
+                    <IconButton
+                        iconSrc={chevronRightIcon}
+                        title={NEXT_THREAD_TITLE}
+                        variant={ICON_BUTTON_VARIANTS.CIRCLE}
+                        onClick={onNextThread}
+                    />
+                    {hasNewThread && <span className={styles['navbar__new-thread-dot']} />}
+                </div>
+            </div>
+        );
+    };
 
     return (
         <header className={styles['navbar']}>
             {renderBrand()}
             {renderDetails()}
-            {renderActions()}
+            {renderThreadSwitcher()}
         </header>
     );
 };

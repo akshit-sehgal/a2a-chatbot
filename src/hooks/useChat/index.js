@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { CONNECTION_STATUS } from '../../constants';
 import { openChatStream, postChatMessage } from '../../services/chatService';
 import { isNonEmptyString } from '../../utils';
@@ -8,6 +8,9 @@ import {
     getActionLabel,
     getActionUserText,
     getSessionId,
+    getThreadIds,
+    getThreadMessages,
+    hasUnvisitedThread,
     normalizeBotMessage
 } from './utils';
 
@@ -17,16 +20,69 @@ const useChat = () => {
     const [connectionStatus, setConnectionStatus] = useState(
         CONNECTION_STATUS.CONNECTING
     );
+    const [selectedThreadId, setSelectedThreadId] = useState();
+    const [visitedThreadIds, setVisitedThreadIds] = useState(() => new Set());
+    const [lastSeenThreadId, setLastSeenThreadId] = useState();
 
     const sessionIdRef = useRef(getSessionId());
+    const hasRequestedWelcomeRef = useRef(false);
+
+    const threadIds = useMemo(() => getThreadIds(messages), [messages]);
+    const activeThreadId =
+        selectedThreadId === undefined ? threadIds[0] : selectedThreadId;
+    const threadMessages = useMemo(
+        () => getThreadMessages(messages, activeThreadId),
+        [messages, activeThreadId]
+    );
+    const activeThreadNumber = threadIds.indexOf(activeThreadId) + 1;
+    const totalThreads = threadIds.length;
+
+    if (activeThreadId !== undefined && activeThreadId !== lastSeenThreadId) {
+        setLastSeenThreadId(activeThreadId);
+        setVisitedThreadIds(new Set(visitedThreadIds).add(activeThreadId));
+    }
+
+    const hasNewThread = hasUnvisitedThread(threadIds, visitedThreadIds);
 
     const appendMessage = useCallback(message => {
         setMessages(previousMessages => previousMessages.concat([message]));
     }, []);
 
+    const goToNextThread = useCallback(() => {
+        if (threadIds.length <= 1) return;
+
+        const currentIndex = threadIds.indexOf(activeThreadId);
+        const nextIndex = (currentIndex + 1) % threadIds.length;
+
+        setSelectedThreadId(threadIds[nextIndex]);
+    }, [threadIds, activeThreadId]);
+
+    const publishToServer = useCallback(
+        async body => {
+            setIsTyping(true);
+
+            try {
+                await postChatMessage({
+                    sessionId: sessionIdRef.current,
+                    threadId: activeThreadId ?? null,
+                    ...body
+                });
+            } catch {
+                setIsTyping(false);
+                appendMessage(createErrorMessage(activeThreadId));
+            }
+        },
+        [appendMessage, activeThreadId]
+    );
+
     const onStreamOpen = useCallback(() => {
         setConnectionStatus(CONNECTION_STATUS.OPEN);
-    }, []);
+
+        if (hasRequestedWelcomeRef.current) return;
+
+        hasRequestedWelcomeRef.current = true;
+        publishToServer({});
+    }, [publishToServer]);
 
     const onStreamError = useCallback(() => {
         setConnectionStatus(CONNECTION_STATUS.CLOSED);
@@ -34,23 +90,9 @@ const useChat = () => {
     }, []);
 
     const onStreamMessage = useCallback(
-        payload => {
+        (data, threadId) => {
             setIsTyping(false);
-            appendMessage(normalizeBotMessage(payload));
-        },
-        [appendMessage]
-    );
-
-    const publishToServer = useCallback(
-        async body => {
-            setIsTyping(true);
-
-            try {
-                await postChatMessage({ sessionId: sessionIdRef.current, ...body });
-            } catch {
-                setIsTyping(false);
-                appendMessage(createErrorMessage());
-            }
+            appendMessage(normalizeBotMessage(data, threadId));
         },
         [appendMessage]
     );
@@ -61,10 +103,10 @@ const useChat = () => {
 
             const trimmedText = text.trim();
 
-            appendMessage(createUserMessage(trimmedText));
+            appendMessage(createUserMessage(trimmedText, activeThreadId));
             publishToServer({ text: trimmedText });
         },
-        [appendMessage, publishToServer]
+        [appendMessage, publishToServer, activeThreadId]
     );
 
     const sendAction = useCallback(
@@ -73,10 +115,12 @@ const useChat = () => {
 
             if (!isNonEmptyString(label)) return;
 
-            appendMessage(createUserMessage(getActionUserText(action)));
+            appendMessage(
+                createUserMessage(getActionUserText(action), activeThreadId)
+            );
             publishToServer({ action: label, data });
         },
-        [appendMessage, publishToServer]
+        [appendMessage, publishToServer, activeThreadId]
     );
 
     useEffect(() => {
@@ -91,11 +135,15 @@ const useChat = () => {
     }, [onStreamOpen, onStreamMessage, onStreamError]);
 
     return {
+        activeThreadNumber,
         connectionStatus,
+        goToNextThread,
+        hasNewThread,
         isTyping,
-        messages,
         sendAction,
-        sendMessage
+        sendMessage,
+        threadMessages,
+        totalThreads
     };
 };
 

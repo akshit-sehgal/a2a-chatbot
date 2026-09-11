@@ -1,4 +1,4 @@
-export const INPUT_PLACEHOLDER = 'Message Hire Copilot…';
+export const INPUT_PLACEHOLDER = 'Message Recruiter Assist…';
 
 export const ENTER_KEY = 'Enter';
 

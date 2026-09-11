@@ -1,14 +1,36 @@
+.bubble-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    align-self: flex-start;
+    max-width: 88%;
+
+    &__avatar {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 50%;
+        background: var(--primary);
+    }
+
+    &__avatar-icon {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}
+
 .bubble {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
 
     &--bot {
-        align-self: flex-start;
-        max-width: 88%;
+        min-width: 0;
         padding: 1.4rem 1.6rem;
         border: 0.1rem solid var(--border);
-        border-radius: 2.2rem 2.2rem 2.2rem 0.8rem;
+        border-radius: 0.8rem 2.2rem 2.2rem 2.2rem;
         background: var(--surface);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);

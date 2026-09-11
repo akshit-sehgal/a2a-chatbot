@@ -56,4 +56,16 @@
             background: var(--danger-tint-strong);
         }
     }
+
+    &--circle {
+        width: 3rem;
+        height: 3rem;
+        border: 0.1rem solid var(--border-strong);
+        border-radius: 50%;
+        background: var(--surface-solid);
+
+        &:hover {
+            background: var(--surface-muted);
+        }
+    }
 }

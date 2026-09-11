@@ -32,5 +32,8 @@ const resolveFromText = text => {
     return INTENTS.FALLBACK;
 };
 
-export const resolveIntent = ({ action, text }) =>
-    resolveFromAction(normalize(action)) || resolveFromText(normalize(action || text));
+export const resolveIntent = ({ action, text }) => {
+    if (!action && !text) return INTENTS.WELCOME;
+
+    return resolveFromAction(normalize(action)) || resolveFromText(normalize(action || text));
+};

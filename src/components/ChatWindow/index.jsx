@@ -3,7 +3,8 @@ import MessageBubble from '../MessageBubble';
 import TypingLoader from '../TypingLoader';
 import TemplateRenderer from '../templates/TemplateRenderer';
 import { MESSAGES_LABEL } from './constants';
-import { isUserMessage, scrollToBottom } from './utils';
+import { getLastItem } from '../../utils';
+import { isUserMessage, scrollToLatestMessage } from './utils';
 import styles from './styles.module.scss';
 
 const ChatWindow = props => {
@@ -12,7 +13,7 @@ const ChatWindow = props => {
     const scrollRef = useRef(null);
 
     useEffect(() => {
-        scrollToBottom(scrollRef.current);
+        scrollToLatestMessage(scrollRef.current, getLastItem(messages), isTyping);
     }, [messages, isTyping]);
 
     const renderMessage = message => {

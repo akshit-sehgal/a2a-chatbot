@@ -1,6 +1,4 @@
-export const APP_NAME = 'Hire Copilot';
-
-export const APP_STATUS_LABEL = 'Online · replies instantly';
+export const APP_NAME = 'Recruiter Assist';
 
 export const MESSAGE_AUTHORS = {
     USER: 'user',
@@ -13,6 +11,14 @@ export const TEMPLATE_TYPES = {
     QUESTIONS_BUILDER: 'questionsBuilder',
     JOB_CARD: 'jobCard',
     TEXT_NODE: 'textNode'
+};
+
+export const TEMPLATE_FALLBACK_TEXT = {
+    [TEMPLATE_TYPES.WELCOME_SCREEN]: 'What should we do first?',
+    [TEMPLATE_TYPES.JOB_POSTING_FORM]: 'Fill in the details below to post your job.',
+    [TEMPLATE_TYPES.QUESTIONS_BUILDER]: 'Add screening questions to get better shortlists.',
+    [TEMPLATE_TYPES.JOB_CARD]: 'Your job is live.',
+    [TEMPLATE_TYPES.TEXT_NODE]: 'Here is what I have for you.'
 };
 
 export const QUESTION_TYPES = {

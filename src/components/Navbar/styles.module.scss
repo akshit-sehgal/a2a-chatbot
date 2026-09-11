@@ -12,6 +12,7 @@
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 0.1rem solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
 
     &__brand {
         display: grid;
@@ -19,7 +20,7 @@
         flex: none;
         width: 4rem;
         height: 4rem;
-        border-radius: 1.4rem;
+        border-radius: 50%;
         background: var(--primary);
     }
 
@@ -35,29 +36,31 @@
         color: var(--text-primary);
     }
 
-    &__status {
+    &__thread-switcher {
         display: flex;
         align-items: center;
-        gap: 0.6rem;
-        margin: 0;
-        font-size: 1.15rem;
-        font-weight: 500;
-        color: var(--text-muted);
+        gap: 0.8rem;
     }
 
-    &__status-dot {
-        width: 0.6rem;
-        height: 0.6rem;
+    &__thread-count {
+        font-size: 1.3rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--text-secondary);
+    }
+
+    &__next-thread {
+        position: relative;
+    }
+
+    &__new-thread-dot {
+        position: absolute;
+        top: -0.1rem;
+        right: -0.1rem;
+        width: 1rem;
+        height: 1rem;
         border-radius: 50%;
         background: var(--success);
-
-        &--offline {
-            background: var(--text-subtle);
-        }
-    }
-
-    &__actions {
-        display: flex;
-        gap: 0.8rem;
+        border: 0.15rem solid var(--surface-solid);
     }
 }

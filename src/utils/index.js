@@ -23,12 +23,12 @@ export const getQueryParam = name => {
     return params.get(name) || '';
 };
 
-export const reloadPage = () => window.location.reload();
-
 export const getInitial = value =>
     isNonEmptyString(value) ? value.trim().charAt(0).toUpperCase() : '';
 
 export const toArray = value => (Array.isArray(value) ? value : []);
+
+export const getLastItem = list => toArray(list).at(-1);
 
 export const replaceAtIndex = (list, index, value) =>
     toArray(list).map((item, itemIndex) => (itemIndex === index ? value : item));

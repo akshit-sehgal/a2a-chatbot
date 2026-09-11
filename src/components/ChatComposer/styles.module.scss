@@ -39,6 +39,10 @@
         color: var(--text-primary);
     }
 
+    &__send {
+        transform: rotate(180deg);
+    }
+
     &__voice {
         width: 4.8rem;
         height: 4.8rem;

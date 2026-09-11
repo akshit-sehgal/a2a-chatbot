@@ -40,7 +40,7 @@ export const openChatStream = ({ sessionId, onOpen, onMessage, onError }) => {
         const payload = parseEventData(event.data);
 
         if (payload?.data) {
-            onMessage(payload.data);
+            onMessage(payload.data, payload.threadId ?? null);
         }
     };
 

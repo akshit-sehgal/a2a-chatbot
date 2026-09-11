@@ -1,1 +1,1 @@
-export const CHAT_LABEL = 'Hire Copilot chat';
+export const CHAT_LABEL = 'Recruiter Assist chat';

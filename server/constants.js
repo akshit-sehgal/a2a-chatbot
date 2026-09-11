@@ -21,8 +21,6 @@ export const INTENTS = {
 
 export const TYPING_DELAY_MS = 750;
 
-export const WELCOME_DELAY_MS = 450;
-
 export const HEARTBEAT_INTERVAL_MS = 25000;
 
 export const RECRUITER_NAME = 'Meera';

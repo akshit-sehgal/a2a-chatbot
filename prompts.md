@@ -37,3 +37,16 @@ On app load open a SSE connection with which it will receive response from the B
 Ask me questions if any.
 
 ====================
+
+Need to add threadId support to messages:
+
+Currently all messages are stored in an array, the SSE event will also send a threadId.
+
+so we need to group messages corresponding to a thread.
+
+We will also send the threadId in the post call (initially it will be null)
+
+To switch between different threads, on the navbar instead of the reload icon, add active thread/total thread with a right chevron clicking on this chevron will auto swtich to the next thread.
+Clicking on the last thread will take the user to the first.
+
+Ask me if there are any open questions

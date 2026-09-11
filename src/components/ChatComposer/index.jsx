@@ -44,6 +44,7 @@ const ChatComposer = props => {
                 iconSrc={sendIcon}
                 title={SEND_TITLE}
                 variant={ICON_BUTTON_VARIANTS.PRIMARY}
+                customCSS={styles['composer__send']}
                 onClick={onSendClick}
             />
         </div>

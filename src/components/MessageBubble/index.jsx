@@ -1,7 +1,8 @@
 import cx from 'classnames';
 import { MESSAGE_AUTHORS } from '../../constants';
 import { isNonEmptyString } from '../../utils';
-import { createMarkup, getBubbleTone } from './utils';
+import sparkleIcon from '../../assets/icons/sparkle-white.svg';
+import { createMarkup, getBubbleTone, isBotTone } from './utils';
 import styles from './styles.module.scss';
 
 const MessageBubble = props => {
@@ -10,6 +11,12 @@ const MessageBubble = props => {
     const tone = getBubbleTone(author);
 
     const bubbleCSS = cx(styles['bubble'], styles[`bubble--${tone}`]);
+
+    const renderAvatar = () => (
+        <span className={styles['bubble-row__avatar']}>
+            <img className={styles['bubble-row__avatar-icon']} src={sparkleIcon} alt="" />
+        </span>
+    );
 
     const renderHeading = () => {
         if (!isNonEmptyString(heading)) return null;
@@ -28,12 +35,21 @@ const MessageBubble = props => {
         );
     };
 
-    return (
+    const renderBubble = () => (
         <article className={bubbleCSS}>
             {renderHeading()}
             {renderHtml()}
             {children}
         </article>
+    );
+
+    if (!isBotTone(tone)) return renderBubble();
+
+    return (
+        <div className={styles['bubble-row']}>
+            {renderAvatar()}
+            {renderBubble()}
+        </div>
     );
 };
 

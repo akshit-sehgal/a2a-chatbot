@@ -7,3 +7,21 @@ export const scrollToBottom = element => {
 
     element.scrollTop = element.scrollHeight;
 };
+
+export const scrollToElementTop = element => {
+    if (!element) return;
+
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+const shouldRevealMessageTop = (message, isTyping) =>
+    !isTyping && Boolean(message) && !isUserMessage(message);
+
+export const scrollToLatestMessage = (container, latestMessage, isTyping) => {
+    if (shouldRevealMessageTop(latestMessage, isTyping)) {
+        scrollToElementTop(container?.lastElementChild);
+        return;
+    }
+
+    scrollToBottom(container);
+};
