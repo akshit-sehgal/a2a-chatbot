@@ -29,6 +29,8 @@ const useChat = () => {
     const appTypeRef = useRef(getAppType());
     const hasRequestedWelcomeRef = useRef(false);
 
+    const knownThreadIdsRef = useRef(new Set());
+
     const threadIds = useMemo(() => getThreadIds(messages), [messages]);
     const activeThreadId =
         selectedThreadId === undefined ? threadIds[0] : selectedThreadId;
@@ -95,6 +97,11 @@ const useChat = () => {
     const onStreamMessage = useCallback(
         (data, threadId) => {
             setIsTyping(false);
+
+            if (!knownThreadIdsRef.current.has(threadId)) {
+                setSelectedThreadId(threadId);
+            }
+
             appendMessage(normalizeBotMessage(data, threadId));
         },
         [appendMessage]
@@ -125,6 +132,10 @@ const useChat = () => {
         },
         [appendMessage, publishToServer, activeThreadId]
     );
+
+    useEffect(() => {
+        knownThreadIdsRef.current = new Set(threadIds);
+    }, [threadIds]);
 
     useEffect(() => {
         const closeStream = openChatStream({
