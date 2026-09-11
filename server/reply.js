@@ -18,6 +18,9 @@ import {
     buildProfileUpdateForm,
     buildProfileUpdated,
     buildQuestionsBuilder,
+    buildReferralApprovalCard,
+    buildReferralApproved,
+    buildReferralRejected,
     buildReferralRequested,
     buildShareLink,
     buildWelcomeScreen
@@ -68,6 +71,11 @@ const REPLY_BUILDERS = {
     [INTENTS.VIEW_OPENINGS]: () => buildJobOpeningCard(),
     [INTENTS.APPLY_JOB]: (session, type, data) => buildJobApplied(data?.jobTitle),
     [INTENTS.ASK_REFERRAL]: (session, type, data) => buildReferralRequested(data?.jobTitle),
+    [INTENTS.REVIEW_REFERRAL]: () => buildReferralApprovalCard(),
+    [INTENTS.APPROVE_REFERRAL]: (session, type, data) =>
+        buildReferralApproved(data?.candidateName, data?.jobTitle),
+    [INTENTS.REJECT_REFERRAL]: (session, type, data) =>
+        buildReferralRejected(data?.candidateName, data?.jobTitle),
     [INTENTS.FALLBACK]: () => buildFallback()
 };
 

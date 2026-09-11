@@ -111,15 +111,25 @@ const ProfileUpdateForm = props => {
         </div>
     );
 
-    const renderExpectedCtcField = () => (
-        <TextField
-            label={FIELD_LABELS.EXPECTED_CTC}
-            name={FIELD_NAMES.EXPECTED_CTC}
-            value={fields[FIELD_NAMES.EXPECTED_CTC]}
-            placeholder={FIELD_PLACEHOLDERS.EXPECTED_CTC}
-            isDisabled={isSubmitted}
-            onChange={onFieldChange(FIELD_NAMES.EXPECTED_CTC)}
-        />
+    const renderExperienceAndCtcFields = () => (
+        <div className={styles['profile-form__row']}>
+            <TextField
+                label={FIELD_LABELS.EXPERIENCE}
+                name={FIELD_NAMES.EXPERIENCE}
+                value={fields[FIELD_NAMES.EXPERIENCE]}
+                placeholder={FIELD_PLACEHOLDERS.EXPERIENCE}
+                isDisabled={isSubmitted}
+                onChange={onFieldChange(FIELD_NAMES.EXPERIENCE)}
+            />
+            <TextField
+                label={FIELD_LABELS.EXPECTED_CTC}
+                name={FIELD_NAMES.EXPECTED_CTC}
+                value={fields[FIELD_NAMES.EXPECTED_CTC]}
+                placeholder={FIELD_PLACEHOLDERS.EXPECTED_CTC}
+                isDisabled={isSubmitted}
+                onChange={onFieldChange(FIELD_NAMES.EXPECTED_CTC)}
+            />
+        </div>
     );
 
     const renderKeySkills = () => (
@@ -172,7 +182,7 @@ const ProfileUpdateForm = props => {
                 <div className={styles['profile-form__divider']} />
                 {renderNameField()}
                 {renderRoleAndLocationFields()}
-                {renderExpectedCtcField()}
+                {renderExperienceAndCtcFields()}
                 {renderKeySkills()}
                 {renderFooter()}
             </form>

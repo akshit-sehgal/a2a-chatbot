@@ -1,0 +1,152 @@
+.referral-approval-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.referral-approval-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    border: 0.1rem solid var(--border-strong);
+    border-radius: 2.4rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.3rem;
+    }
+
+    &__avatar {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 4.6rem;
+        height: 4.6rem;
+        border-radius: 1.5rem;
+        background: var(--surface-indigo);
+        color: var(--primary-dark);
+        font-size: 2.2rem;
+        font-weight: 800;
+    }
+
+    &__identity {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+    }
+
+    &__subtitle {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__score {
+        flex: none;
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.9rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+
+        &--high {
+            background: var(--success-tint);
+            color: var(--success-dark);
+        }
+
+        &--medium {
+            background: var(--primary-tint-strong);
+            color: var(--primary-dark);
+        }
+
+        &--low {
+            background: var(--surface-muted);
+            color: var(--text-muted);
+        }
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__meta-row {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        font-size: 1.35rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    &__divider {
+        height: 0.1rem;
+        background: rgba(15, 23, 42, 0.08);
+    }
+
+    &__job {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1.2rem;
+        border-radius: 1.6rem;
+        background: var(--surface-soft);
+    }
+
+    &__job-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__job-title {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        > * {
+            flex: 1;
+        }
+    }
+
+    &__reject-btn {
+        border-color: var(--danger-tint-strong);
+        background: var(--danger-tint);
+        color: var(--danger);
+    }
+}
+
+@media (max-width: 26rem) {
+    .referral-approval-card__footer {
+        flex-direction: column-reverse;
+    }
+}

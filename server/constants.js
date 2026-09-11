@@ -8,6 +8,7 @@ export const TEMPLATE_TYPES = {
     PROFILE_UPDATE_FORM: 'profileUpdateForm',
     APPLICATION_STATUS_LIST: 'applicationStatusList',
     JOB_OPENING_CARD: 'jobOpeningCard',
+    REFERRAL_APPROVAL_CARD: 'referralApprovalCard',
     TEXT_NODE: 'textNode'
 };
 
@@ -25,6 +26,9 @@ export const INTENTS = {
     VIEW_OPENINGS: 'viewOpenings',
     APPLY_JOB: 'applyJob',
     ASK_REFERRAL: 'askReferral',
+    REVIEW_REFERRAL: 'reviewReferral',
+    APPROVE_REFERRAL: 'approveReferral',
+    REJECT_REFERRAL: 'rejectReferral',
     FALLBACK: 'fallback'
 };
 
@@ -97,6 +101,7 @@ export const DEFAULT_PROFILE_DRAFT = {
         name: CANDIDATE_NAME,
         preferredRole: 'Frontend Engineer',
         preferredLocation: 'Remote (India)',
+        experience: '2-4 Yrs',
         expectedCtc: '₹18–24 LPA'
     },
     keySkills: ['React', 'TypeScript', 'Node.js']
@@ -135,3 +140,17 @@ export const APPLICANTS = [
     { name: 'Arjun Verma', role: 'Frontend Engineer · 2 yrs · TypeScript', score: '88%' },
     { name: 'Sara Nair', role: 'Full-stack · 3 yrs · Next.js, Go', score: '81%' }
 ];
+
+export const REFERRAL_REQUEST = {
+    candidate: {
+        name: 'Rhea Kapoor',
+        experience: '4 Yrs',
+        location: 'Remote (India)'
+    },
+    job: {
+        title: 'Frontend Engineer',
+        location: 'Remote (India)',
+        ctc: '₹16–20 LPA'
+    },
+    matchScore: 92
+};

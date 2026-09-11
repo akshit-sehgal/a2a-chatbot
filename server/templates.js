@@ -10,6 +10,7 @@ import {
     PAST_JOBS,
     PROFILE_VIEWS_COUNT,
     RECRUITER_NAME,
+    REFERRAL_REQUEST,
     TEMPLATE_TYPES
 } from './constants.js';
 
@@ -137,6 +138,37 @@ export const buildJobOpeningCard = () =>
             applyLabel: 'Apply now',
             referralLabel: 'Ask for referral'
         }
+    );
+
+export const buildReferralApprovalCard = () =>
+    buildMessage(
+        TEMPLATE_TYPES.REFERRAL_APPROVAL_CARD,
+        `<strong>${REFERRAL_REQUEST.candidate.name}</strong> is asking for a referral to <strong>${REFERRAL_REQUEST.job.title}</strong> — here's how they match up.`,
+        [],
+        {
+            title: 'Referral request',
+            candidate: REFERRAL_REQUEST.candidate,
+            job: REFERRAL_REQUEST.job,
+            matchScore: REFERRAL_REQUEST.matchScore,
+            approveLabel: 'Approve',
+            rejectLabel: 'Reject'
+        }
+    );
+
+export const buildReferralApproved = (candidateName, jobTitle) =>
+    buildTextNode(
+        candidateName && jobTitle
+            ? `Referral approved. I've let <strong>${candidateName}</strong> know they're being referred for <strong>${jobTitle}</strong>.`
+            : "Referral approved. I've let the candidate know.",
+        ['Review applicants', 'View my jobs']
+    );
+
+export const buildReferralRejected = (candidateName, jobTitle) =>
+    buildTextNode(
+        candidateName && jobTitle
+            ? `Referral declined for <strong>${candidateName}</strong> on <strong>${jobTitle}</strong>. They won't be notified of this review.`
+            : "Referral declined. They won't be notified of this review.",
+        ['Review applicants', 'View my jobs']
     );
 
 export const buildJobApplied = jobTitle =>

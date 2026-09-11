@@ -5,6 +5,7 @@ export const getInitialFields = data => ({
     [FIELD_NAMES.NAME]: data?.fields?.name || '',
     [FIELD_NAMES.PREFERRED_ROLE]: data?.fields?.preferredRole || '',
     [FIELD_NAMES.PREFERRED_LOCATION]: data?.fields?.preferredLocation || '',
+    [FIELD_NAMES.EXPERIENCE]: data?.fields?.experience || '',
     [FIELD_NAMES.EXPECTED_CTC]: data?.fields?.expectedCtc || ''
 });
 

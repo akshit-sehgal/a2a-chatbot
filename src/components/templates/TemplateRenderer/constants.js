@@ -5,6 +5,7 @@ import JobOpeningCard from '../JobOpeningCard';
 import JobPostingForm from '../JobPostingForm';
 import ProfileUpdateForm from '../ProfileUpdateForm';
 import QuestionsBuilder from '../QuestionsBuilder';
+import ReferralApprovalCard from '../ReferralApprovalCard';
 import TextNode from '../TextNode';
 import WelcomeScreen from '../WelcomeScreen';
 
@@ -16,5 +17,6 @@ export const TEMPLATE_COMPONENTS = {
     [TEMPLATE_TYPES.PROFILE_UPDATE_FORM]: ProfileUpdateForm,
     [TEMPLATE_TYPES.APPLICATION_STATUS_LIST]: ApplicationStatusList,
     [TEMPLATE_TYPES.JOB_OPENING_CARD]: JobOpeningCard,
+    [TEMPLATE_TYPES.REFERRAL_APPROVAL_CARD]: ReferralApprovalCard,
     [TEMPLATE_TYPES.TEXT_NODE]: TextNode
 };

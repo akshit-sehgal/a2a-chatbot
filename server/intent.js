@@ -12,6 +12,8 @@ const resolveFromAction = action => {
     if (action === 'save profile') return INTENTS.SAVE_PROFILE;
     if (action === 'apply now') return INTENTS.APPLY_JOB;
     if (action === 'ask for referral') return INTENTS.ASK_REFERRAL;
+    if (action === 'approve') return INTENTS.APPROVE_REFERRAL;
+    if (action === 'reject') return INTENTS.REJECT_REFERRAL;
 
     return null;
 };
@@ -27,6 +29,10 @@ const resolveFromText = text => {
 
     if (includesAny(text, ['view openings', 'new openings', 'job openings'])) {
         return INTENTS.VIEW_OPENINGS;
+    }
+
+    if (includesAny(text, ['referral request', 'review referral'])) {
+        return INTENTS.REVIEW_REFERRAL;
     }
 
     if (includesAny(text, ['applicant', 'candidate', 'shortlist'])) {
