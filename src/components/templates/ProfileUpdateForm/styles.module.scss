@@ -1,0 +1,99 @@
+.profile-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    padding: 1.6rem;
+    border: 0.1rem solid var(--border-lighter);
+    border-radius: 2.4rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+    }
+
+    &__header-icon {
+        display: grid;
+        place-items: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 0.9rem;
+        background: var(--primary);
+    }
+
+    &__header-title {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+    }
+
+    &__divider {
+        height: 0.1rem;
+        background: linear-gradient(
+            90deg,
+            rgba(79, 70, 229, 0.25),
+            rgba(255, 255, 255, 0)
+        );
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.1rem;
+    }
+
+    &__skills {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    &__skills-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    &__skills-input {
+        flex: 1;
+        min-width: 9.6rem;
+        min-height: 3.4rem;
+        padding: 0.6rem 1rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.7);
+        border: 0.1rem dashed rgba(79, 70, 229, 0.35);
+        border-radius: 1.1rem;
+        outline: none;
+
+        &:focus {
+            border-style: solid;
+            border-color: var(--primary);
+        }
+    }
+}
+
+@media (max-width: 26rem) {
+    .profile-form__row {
+        grid-template-columns: 1fr;
+    }
+}

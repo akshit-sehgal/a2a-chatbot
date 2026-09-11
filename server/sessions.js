@@ -1,10 +1,11 @@
-import { DEFAULT_JOB_DRAFT } from './constants.js';
+import { DEFAULT_JOB_DRAFT, DEFAULT_PROFILE_DRAFT } from './constants.js';
 
 const sessions = new Map();
 
 const createSession = () => ({
     client: null,
-    draft: structuredClone(DEFAULT_JOB_DRAFT)
+    draft: structuredClone(DEFAULT_JOB_DRAFT),
+    profileDraft: structuredClone(DEFAULT_PROFILE_DRAFT)
 });
 
 export const getSession = sessionId => {
@@ -33,4 +34,12 @@ export const updateSessionDraft = (sessionId, patch) => {
     session.draft = { ...session.draft, ...patch };
 
     return session.draft;
+};
+
+export const updateSessionProfileDraft = (sessionId, patch) => {
+    const session = getSession(sessionId);
+
+    session.profileDraft = { ...session.profileDraft, ...patch };
+
+    return session.profileDraft;
 };

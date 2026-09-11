@@ -1,0 +1,114 @@
+.application-status-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.application-status {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    border: 0.1rem solid var(--border-strong);
+    border-radius: 2.4rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    &__title {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        padding: 1rem 1.1rem;
+        border: 0.1rem solid var(--border);
+        border-radius: 1.6rem;
+        background: var(--surface-soft);
+    }
+
+    &__avatar {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1.1rem;
+        background: var(--surface-muted);
+    }
+
+    &__identity {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__job-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+    }
+
+    &__meta {
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+
+    &__status {
+        flex: none;
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.9rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+
+        &--shortlisted {
+            background: var(--success-tint);
+            color: var(--success-dark);
+        }
+
+        &--interview-scheduled {
+            background: var(--primary-tint-strong);
+            color: var(--primary-dark);
+        }
+
+        &--under-review {
+            background: var(--surface-muted);
+            color: var(--text-muted);
+        }
+
+        &--not-selected {
+            background: var(--danger-tint);
+            color: var(--danger);
+        }
+    }
+}
+
+@media (max-width: 26rem) {
+    .application-status__row {
+        flex-wrap: wrap;
+    }
+
+    .application-status__status {
+        margin-left: 4.7rem;
+    }
+}

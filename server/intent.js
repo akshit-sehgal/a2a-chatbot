@@ -9,11 +9,20 @@ const resolveFromAction = action => {
     if (action === 'continue') return INTENTS.BUILD_QUESTIONS;
     if (action === 'save & publish' || action === 'skip') return INTENTS.PUBLISH_JOB;
     if (action === 'share link') return INTENTS.SHARE_LINK;
+    if (action === 'save profile') return INTENTS.SAVE_PROFILE;
 
     return null;
 };
 
 const resolveFromText = text => {
+    if (includesAny(text, ['update your profile', 'update profile'])) {
+        return INTENTS.UPDATE_PROFILE;
+    }
+
+    if (includesAny(text, ['application status', 'my applications'])) {
+        return INTENTS.APPLICATION_STATUS;
+    }
+
     if (includesAny(text, ['applicant', 'candidate', 'shortlist'])) {
         return INTENTS.LIST_APPLICANTS;
     }

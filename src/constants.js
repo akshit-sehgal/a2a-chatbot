@@ -10,6 +10,8 @@ export const TEMPLATE_TYPES = {
     JOB_POSTING_FORM: 'jobPostingForm',
     QUESTIONS_BUILDER: 'questionsBuilder',
     JOB_CARD: 'jobCard',
+    PROFILE_UPDATE_FORM: 'profileUpdateForm',
+    APPLICATION_STATUS_LIST: 'applicationStatusList',
     TEXT_NODE: 'textNode'
 };
 
@@ -18,6 +20,8 @@ export const TEMPLATE_FALLBACK_TEXT = {
     [TEMPLATE_TYPES.JOB_POSTING_FORM]: 'Fill in the details below to post your job.',
     [TEMPLATE_TYPES.QUESTIONS_BUILDER]: 'Add screening questions to get better shortlists.',
     [TEMPLATE_TYPES.JOB_CARD]: 'Your job is live.',
+    [TEMPLATE_TYPES.PROFILE_UPDATE_FORM]: 'Update the fields below to refresh your profile.',
+    [TEMPLATE_TYPES.APPLICATION_STATUS_LIST]: 'Here is where things stand on your applications.',
     [TEMPLATE_TYPES.TEXT_NODE]: 'Here is what I have for you.'
 };
 
@@ -68,7 +72,8 @@ export const COMMON_LABELS = {
     SEND: 'Send',
     SHARE_LINK: 'Share link',
     SKIP: 'Skip',
-    SAVE_AND_PUBLISH: 'Save & publish'
+    SAVE_AND_PUBLISH: 'Save & publish',
+    SAVE_PROFILE: 'Save profile'
 };
 
 export const ERROR_MESSAGE_TEXT = 'Something went wrong while reaching the server. Please try again.';

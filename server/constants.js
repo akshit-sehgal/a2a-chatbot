@@ -5,6 +5,8 @@ export const TEMPLATE_TYPES = {
     JOB_POSTING_FORM: 'jobPostingForm',
     QUESTIONS_BUILDER: 'questionsBuilder',
     JOB_CARD: 'jobCard',
+    PROFILE_UPDATE_FORM: 'profileUpdateForm',
+    APPLICATION_STATUS_LIST: 'applicationStatusList',
     TEXT_NODE: 'textNode'
 };
 
@@ -16,6 +18,9 @@ export const INTENTS = {
     LIST_JOBS: 'listJobs',
     LIST_APPLICANTS: 'listApplicants',
     SHARE_LINK: 'shareLink',
+    UPDATE_PROFILE: 'updateProfile',
+    SAVE_PROFILE: 'saveProfile',
+    APPLICATION_STATUS: 'applicationStatus',
     FALLBACK: 'fallback'
 };
 
@@ -39,6 +44,47 @@ export const PROFILE_VIEWS_COUNT = 4;
 export const NEW_OPENINGS_COUNT = 12;
 
 export const APPLICATION_STATUS_SUMMARY = '2 in review · 1 interview scheduled';
+
+export const JOB_APPLICATIONS = [
+    {
+        id: 'application-1',
+        jobTitle: 'SDE-2',
+        location: 'Gurugram',
+        ctc: '₹18–24 LPA',
+        status: 'Shortlisted'
+    },
+    {
+        id: 'application-2',
+        jobTitle: 'Frontend Engineer',
+        location: 'Remote (India)',
+        ctc: '₹16–20 LPA',
+        status: 'Interview scheduled'
+    },
+    {
+        id: 'application-3',
+        jobTitle: 'Backend Engineer',
+        location: 'Bengaluru',
+        ctc: '₹20–28 LPA',
+        status: 'Under review'
+    },
+    {
+        id: 'application-4',
+        jobTitle: 'Full-stack Developer',
+        location: 'Hybrid — Pune',
+        ctc: '₹15–19 LPA',
+        status: 'Not selected'
+    }
+];
+
+export const DEFAULT_PROFILE_DRAFT = {
+    fields: {
+        name: CANDIDATE_NAME,
+        preferredRole: 'Frontend Engineer',
+        preferredLocation: 'Remote (India)',
+        expectedCtc: '₹18–24 LPA'
+    },
+    keySkills: ['React', 'TypeScript', 'Node.js']
+};
 
 export const DEFAULT_JOB_DRAFT = {
     fields: {

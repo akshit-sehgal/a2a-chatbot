@@ -4,12 +4,21 @@ import {
     CANDIDATE_NAME,
     COMPANY_NAME,
     DEFAULT_QUESTIONS,
+    JOB_APPLICATIONS,
     NEW_OPENINGS_COUNT,
     PAST_JOBS,
     PROFILE_VIEWS_COUNT,
     RECRUITER_NAME,
     TEMPLATE_TYPES
 } from './constants.js';
+
+const buildKeySkillsNote = keySkillCount => {
+    if (!keySkillCount) return 'No key skills added';
+
+    const suffix = keySkillCount === 1 ? 'key skill' : 'key skills';
+
+    return `${keySkillCount} ${suffix} listed`;
+};
 
 const buildMessage = (type, text, actions, data) => ({
     data: { type, text, actions, data }
@@ -79,6 +88,41 @@ export const buildJobSeekerWelcomeScreen = () =>
                     variant: 'secondary'
                 }
             ]
+        }
+    );
+
+export const buildProfileUpdateForm = profileDraft =>
+    buildMessage(
+        TEMPLATE_TYPES.PROFILE_UPDATE_FORM,
+        "Let's keep things current. Update anything that's changed and I'll refresh your matches.",
+        [],
+        {
+            title: 'Update your profile',
+            submitLabel: 'Save profile',
+            fields: profileDraft.fields,
+            keySkills: profileDraft.keySkills
+        }
+    );
+
+export const buildProfileUpdated = profileDraft => {
+    const { fields, keySkills } = profileDraft;
+
+    return buildMessage(
+        TEMPLATE_TYPES.TEXT_NODE,
+        `Profile updated. I'll match you against <strong>${fields.preferredRole}</strong> roles in ${fields.preferredLocation} — ${buildKeySkillsNote(keySkills.length)}.`,
+        ['View openings', 'Application status'],
+        {}
+    );
+};
+
+export const buildApplicationStatusList = () =>
+    buildMessage(
+        TEMPLATE_TYPES.APPLICATION_STATUS_LIST,
+        `Here's where things stand across your <strong>${JOB_APPLICATIONS.length} active applications</strong>.`,
+        ['View openings', 'Update your profile'],
+        {
+            title: 'Application status',
+            applications: JOB_APPLICATIONS
         }
     );
 

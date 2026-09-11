@@ -24,9 +24,9 @@
 
     &--removable {
         padding: 0.7rem 1rem;
-        border: 0.1rem solid rgba(79, 70, 229, 0.2);
+        border: 0.1rem solid var(--primary-border);
         border-radius: 1.1rem;
-        background: rgba(79, 70, 229, 0.09);
+        background: var(--primary-tint);
         color: var(--primary-dark);
         font-size: 1.25rem;
         cursor: pointer;
