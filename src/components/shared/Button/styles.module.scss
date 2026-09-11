@@ -57,14 +57,14 @@
     &--ghost {
         min-height: 4rem;
         padding: 0 1.4rem;
-        border: 0.15rem solid rgba(79, 70, 229, 0.25);
+        border: 0.15rem solid var(--primary-border);
         border-radius: 1.3rem;
         background: rgba(255, 255, 255, 0.7);
         color: var(--primary);
         font-size: 1.3rem;
 
         &:not(:disabled):hover {
-            background: rgba(79, 70, 229, 0.09);
+            background: var(--primary-tint);
         }
     }
 

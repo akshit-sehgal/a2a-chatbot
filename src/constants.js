@@ -12,6 +12,7 @@ export const TEMPLATE_TYPES = {
     JOB_CARD: 'jobCard',
     PROFILE_UPDATE_FORM: 'profileUpdateForm',
     APPLICATION_STATUS_LIST: 'applicationStatusList',
+    JOB_OPENING_CARD: 'jobOpeningCard',
     TEXT_NODE: 'textNode'
 };
 
@@ -22,6 +23,7 @@ export const TEMPLATE_FALLBACK_TEXT = {
     [TEMPLATE_TYPES.JOB_CARD]: 'Your job is live.',
     [TEMPLATE_TYPES.PROFILE_UPDATE_FORM]: 'Update the fields below to refresh your profile.',
     [TEMPLATE_TYPES.APPLICATION_STATUS_LIST]: 'Here is where things stand on your applications.',
+    [TEMPLATE_TYPES.JOB_OPENING_CARD]: 'A new role matches your profile.',
     [TEMPLATE_TYPES.TEXT_NODE]: 'Here is what I have for you.'
 };
 

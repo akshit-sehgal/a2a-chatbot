@@ -9,13 +9,16 @@ import {
     buildApplicantsList,
     buildApplicationStatusList,
     buildFallback,
+    buildJobApplied,
     buildJobCard,
+    buildJobOpeningCard,
     buildJobPostingForm,
     buildJobSeekerWelcomeScreen,
     buildJobsList,
     buildProfileUpdateForm,
     buildProfileUpdated,
     buildQuestionsBuilder,
+    buildReferralRequested,
     buildShareLink,
     buildWelcomeScreen
 } from './templates.js';
@@ -62,6 +65,9 @@ const REPLY_BUILDERS = {
     [INTENTS.UPDATE_PROFILE]: session => buildProfileUpdateForm(session.profileDraft),
     [INTENTS.SAVE_PROFILE]: session => buildProfileUpdated(session.profileDraft),
     [INTENTS.APPLICATION_STATUS]: () => buildApplicationStatusList(),
+    [INTENTS.VIEW_OPENINGS]: () => buildJobOpeningCard(),
+    [INTENTS.APPLY_JOB]: (session, type, data) => buildJobApplied(data?.jobTitle),
+    [INTENTS.ASK_REFERRAL]: (session, type, data) => buildReferralRequested(data?.jobTitle),
     [INTENTS.FALLBACK]: () => buildFallback()
 };
 
@@ -74,5 +80,5 @@ export const buildReply = ({ sessionId, action, text, data, type }) => {
 
     const buildReplyForIntent = REPLY_BUILDERS[intent] || REPLY_BUILDERS[INTENTS.FALLBACK];
 
-    return buildReplyForIntent(getSession(sessionId), type);
+    return buildReplyForIntent(getSession(sessionId), type, data);
 };

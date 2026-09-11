@@ -5,6 +5,7 @@ import {
     COMPANY_NAME,
     DEFAULT_QUESTIONS,
     JOB_APPLICATIONS,
+    NEW_JOB_OPENING,
     NEW_OPENINGS_COUNT,
     PAST_JOBS,
     PROFILE_VIEWS_COUNT,
@@ -124,6 +125,34 @@ export const buildApplicationStatusList = () =>
             title: 'Application status',
             applications: JOB_APPLICATIONS
         }
+    );
+
+export const buildJobOpeningCard = () =>
+    buildMessage(
+        TEMPLATE_TYPES.JOB_OPENING_CARD,
+        `Found a fresh match. <strong>${NEW_JOB_OPENING.title}</strong> at ${NEW_JOB_OPENING.company} lines up well with your profile.`,
+        ['View openings', 'Application status'],
+        {
+            ...NEW_JOB_OPENING,
+            applyLabel: 'Apply now',
+            referralLabel: 'Ask for referral'
+        }
+    );
+
+export const buildJobApplied = jobTitle =>
+    buildTextNode(
+        jobTitle
+            ? `You're all set. I've submitted your application for <strong>${jobTitle}</strong> — I'll let you know as soon as the recruiter responds.`
+            : "You're all set. I've submitted your application — I'll let you know as soon as the recruiter responds.",
+        ['View openings', 'Application status']
+    );
+
+export const buildReferralRequested = jobTitle =>
+    buildTextNode(
+        jobTitle
+            ? `Done. I've asked your connections about a referral for <strong>${jobTitle}</strong> — I'll update you here.`
+            : "Done. I've asked your connections for a referral — I'll update you here.",
+        ['View openings', 'Application status']
     );
 
 export const buildJobPostingForm = draft =>

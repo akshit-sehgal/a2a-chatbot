@@ -10,6 +10,8 @@ const resolveFromAction = action => {
     if (action === 'save & publish' || action === 'skip') return INTENTS.PUBLISH_JOB;
     if (action === 'share link') return INTENTS.SHARE_LINK;
     if (action === 'save profile') return INTENTS.SAVE_PROFILE;
+    if (action === 'apply now') return INTENTS.APPLY_JOB;
+    if (action === 'ask for referral') return INTENTS.ASK_REFERRAL;
 
     return null;
 };
@@ -23,6 +25,10 @@ const resolveFromText = text => {
         return INTENTS.APPLICATION_STATUS;
     }
 
+    if (includesAny(text, ['view openings', 'new openings', 'job openings'])) {
+        return INTENTS.VIEW_OPENINGS;
+    }
+
     if (includesAny(text, ['applicant', 'candidate', 'shortlist'])) {
         return INTENTS.LIST_APPLICANTS;
     }
@@ -34,7 +40,7 @@ const resolveFromText = text => {
         return INTENTS.POST_JOB;
     }
 
-    if (includesAny(text, ['my jobs', 'view jobs', 'roles', 'openings'])) {
+    if (includesAny(text, ['my jobs', 'view jobs', 'roles'])) {
         return INTENTS.LIST_JOBS;
     }
 

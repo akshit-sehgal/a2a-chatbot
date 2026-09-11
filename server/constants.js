@@ -7,6 +7,7 @@ export const TEMPLATE_TYPES = {
     JOB_CARD: 'jobCard',
     PROFILE_UPDATE_FORM: 'profileUpdateForm',
     APPLICATION_STATUS_LIST: 'applicationStatusList',
+    JOB_OPENING_CARD: 'jobOpeningCard',
     TEXT_NODE: 'textNode'
 };
 
@@ -21,6 +22,9 @@ export const INTENTS = {
     UPDATE_PROFILE: 'updateProfile',
     SAVE_PROFILE: 'saveProfile',
     APPLICATION_STATUS: 'applicationStatus',
+    VIEW_OPENINGS: 'viewOpenings',
+    APPLY_JOB: 'applyJob',
+    ASK_REFERRAL: 'askReferral',
     FALLBACK: 'fallback'
 };
 
@@ -75,6 +79,18 @@ export const JOB_APPLICATIONS = [
         status: 'Not selected'
     }
 ];
+
+export const NEW_JOB_OPENING = {
+    title: 'Frontend Engineer',
+    company: 'Bright Path Technologies',
+    status: 'New',
+    location: 'Remote (India)',
+    experience: '2-4 Yrs',
+    salary: '₹16–20 LPA',
+    description:
+        'Own our design system and ship customer-facing UI across web and mobile, pairing closely with product and design.',
+    skills: ['React', 'TypeScript', 'Next.js', 'Design systems']
+};
 
 export const DEFAULT_PROFILE_DRAFT = {
     fields: {
