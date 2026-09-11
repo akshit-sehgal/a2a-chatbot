@@ -2,10 +2,22 @@ import { API_ROUTES } from '../constants';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
-const buildUrl = route => `${API_BASE_URL}${route}`;
+const buildUrl = (route, queryParams = {}) => {
+    const query = new URLSearchParams();
 
-export const getStreamUrl = sessionId =>
-    `${buildUrl(API_ROUTES.STREAM)}?sessionId=${encodeURIComponent(sessionId)}`;
+    Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+            query.set(key, value);
+        }
+    });
+
+    const queryString = query.toString();
+
+    return `${API_BASE_URL}${route}${queryString ? `?${queryString}` : ''}`;
+};
+
+export const getStreamUrl = (sessionId, appType) =>
+    buildUrl(API_ROUTES.STREAM, { sessionId, type: appType });
 
 const parseEventData = rawData => {
     try {
@@ -16,7 +28,7 @@ const parseEventData = rawData => {
 };
 
 const postJson = async (route, body) => {
-    const response = await fetch(buildUrl(route), {
+    const response = await fetch(buildUrl(route, { type: body.type }), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -31,8 +43,8 @@ const postJson = async (route, body) => {
 
 export const postChatMessage = body => postJson(API_ROUTES.MESSAGE, body);
 
-export const openChatStream = ({ sessionId, onOpen, onMessage, onError }) => {
-    const eventSource = new EventSource(getStreamUrl(sessionId));
+export const openChatStream = ({ sessionId, appType, onOpen, onMessage, onError }) => {
+    const eventSource = new EventSource(getStreamUrl(sessionId, appType));
 
     eventSource.onopen = () => onOpen();
 

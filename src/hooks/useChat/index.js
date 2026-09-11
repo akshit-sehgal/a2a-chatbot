@@ -129,6 +129,7 @@ const useChat = () => {
     useEffect(() => {
         const closeStream = openChatStream({
             sessionId: sessionIdRef.current,
+            appType: appTypeRef.current,
             onOpen: onStreamOpen,
             onMessage: onStreamMessage,
             onError: onStreamError
